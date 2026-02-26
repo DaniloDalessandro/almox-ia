@@ -49,7 +49,7 @@ Siga os passos abaixo para configurar e executar o projeto localmente.
 ### 1. Clonar o Repositório
 
 ```bash
-git clone https://github.com/seu-usuario/chama-ia.git
+git clone https://github.com/DaniloDalessandro/almox-ia.git
 cd chama-ia
 ```
 
