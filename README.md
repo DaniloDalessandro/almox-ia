@@ -50,7 +50,7 @@ Siga os passos abaixo para configurar e executar o projeto localmente.
 
 ```bash
 git clone https://github.com/DaniloDalessandro/almox-ia.git
-cd chama-ia
+cd almox-ia
 ```
 
 ### 2. Configuração do Backend
