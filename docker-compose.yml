@@ -5,7 +5,7 @@ services:
     environment:
       - SECRET_KEY=django-insecure-change-me-in-production
       - DEBUG=False
-      - ALLOWED_HOSTS=localhost,127.0.0.1,backend
+      - ALLOWED_HOSTS=localhost,127.0.0.1,backend,*
       - CORS_ALLOWED_ORIGINS=http://localhost:3000
       - CSRF_TRUSTED_ORIGINS=http://localhost:3000
     volumes:
