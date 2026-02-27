@@ -1,0 +1,26 @@
+services:
+  backend:
+    build:
+      context: ./back
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./back:/app
+    env_file:
+      - ./back/.env
+    environment:
+      - ALLOWED_HOSTS=localhost,127.0.0.1,backend
+
+  frontend:
+    build:
+      context: ./front
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./front/src:/app/src
+      - ./front/public:/app/public
+    environment:
+      - BACKEND_URL=http://backend:8000
+      - WATCHPACK_POLLING=true
+    depends_on:
+      - backend
