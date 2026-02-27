@@ -17,6 +17,7 @@ venv/
 
 # Django
 back/db.sqlite3
+back/data/*.sqlite3
 back/media/
 *.log
 
