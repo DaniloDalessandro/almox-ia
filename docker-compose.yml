@@ -6,10 +6,10 @@ services:
       - "8000:8000"
     volumes:
       - ./back:/app
-    env_file:
-      - ./back/.env
     environment:
-      - ALLOWED_HOSTS=localhost,127.0.0.1,backend
+      - SECRET_KEY=${SECRET_KEY:-django-insecure-change-me-in-production}
+      - DEBUG=${DEBUG:-False}
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS:-localhost,127.0.0.1,backend}
 
   frontend:
     build:
