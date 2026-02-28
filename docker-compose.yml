@@ -2,6 +2,8 @@ services:
   backend:
     build:
       context: ./back
+    ports:
+      - "8000:8000"
     environment:
       - SECRET_KEY=django-insecure-change-me-in-production
       - DEBUG=False
@@ -17,6 +19,8 @@ services:
       context: ./front
       args:
         - BACKEND_URL=http://backend:8000
+    ports:
+      - "3000:3000"
     environment:
       - NODE_ENV=production
     depends_on:
