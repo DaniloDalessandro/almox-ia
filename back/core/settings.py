@@ -127,16 +127,20 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # Default primary key field type
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CSRF_TRUSTED_ORIGINS = [o.strip() for o in config("CSRF_TRUSTED_ORIGINS", default="http://localhost:3000").split(",")]
+_csrf_origins = config("CSRF_TRUSTED_ORIGINS", default="")
+CSRF_TRUSTED_ORIGINS = [o.strip() for o in _csrf_origins.split(",") if o.strip()]
 
 # Security — proxy SSL (EasyPanel/Nginx termina SSL)
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 SESSION_COOKIE_SECURE = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
 
-# CORS Configuration
-_cors_origins = config("CORS_ALLOWED_ORIGINS", default="http://localhost:3000,http://localhost:3001,http://127.0.0.1:3000,http://127.0.0.1:3001")
-CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors_origins.split(",")]
+# CORS Configuration — se CORS_ALLOWED_ORIGINS=* permite todas as origens
+_cors_origins = config("CORS_ALLOWED_ORIGINS", default="*")
+if _cors_origins.strip() == "*":
+    CORS_ALLOW_ALL_ORIGINS = True
+else:
+    CORS_ALLOWED_ORIGINS = [o.strip() for o in _cors_origins.split(",") if o.strip()]
 
 CORS_ALLOW_CREDENTIALS = True
 
