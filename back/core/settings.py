@@ -130,10 +130,11 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 _csrf_origins = config("CSRF_TRUSTED_ORIGINS", default="")
 CSRF_TRUSTED_ORIGINS = [o.strip() for o in _csrf_origins.split(",") if o.strip()]
 
-# Security — proxy SSL (EasyPanel/Nginx termina SSL)
-SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
-SESSION_COOKIE_SECURE = not DEBUG
-CSRF_COOKIE_SECURE = not DEBUG
+# Cookies seguros apenas quando explicitamente em HTTPS
+_use_https = config("USE_HTTPS", default=False, cast=bool)
+SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https") if _use_https else None
+SESSION_COOKIE_SECURE = _use_https
+CSRF_COOKIE_SECURE = _use_https
 
 # CORS Configuration — se CORS_ALLOWED_ORIGINS=* permite todas as origens
 _cors_origins = config("CORS_ALLOWED_ORIGINS", default="*")
